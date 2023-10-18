@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "760572861723",
+    "project_id": "alpha-vantage-test",
+    "storage_bucket": "alpha-vantage-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760572861723:android:64051ceb42d16fd74f47be",
+        "android_client_info": {
+          "package_name": "com.example.alphavantagetest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbwGOtBAF0lJo8-yssIW_BoC322tTBB40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760572861723:android:592616ec3adcb48c4f47be",
+        "android_client_info": {
+          "package_name": "com.example.ruuttest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbwGOtBAF0lJo8-yssIW_BoC322tTBB40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

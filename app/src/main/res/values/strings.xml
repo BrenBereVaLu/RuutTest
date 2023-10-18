@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">RuutTest</string>
+
+    <string name="bottom_menu_news">News</string>
+    <string name="bottom_menu_bar">Bar Chart</string>
+    <string name="bottom_menu_pie">Pie Chart</string>
+
+    <string name="nav_profile_text">Perfil</string>
+    <string name="nav_logout_text">Log out</string>
+    <string name="nav_home_text">Home</string>
+
+    <string name="all">TODO</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_income">INCOME STATEMENT</string>
+    <string name="title_balance_sheet">BALANCE SHEET</string>
+    <string name="title_home_news">NEWS SENTIMENT</string>
+
+    <string name="text_password_obligatory">This field is required, please enter a password</string>
+    <string name="text_confirm_password_obligatory">This field is required, please confirm the password</string>
+    <string name="text_password_length">Password must be more than 8 characters</string>
+    <string name="text_password_same">Passwords do not match</string>
+
+    <string name="title_username">Username</string>
+    <string name="title_change_password">Change password</string>
+    <string name="log_out">Log out</string>
+    <string name="title_delete_account">Delete account</string>
+    <string name="title_home">Home</string>
+
+    <string name="hint_password">Password</string>
+    <string name="hint_change">Change</string>
+    <string name="hint_email">Email</string>
+
+    <string name="title_new_pass">New password</string>
+    <string name="hint_new_password">New password</string>
+    <string name="hint_confirm_new_password">Confirm new password</string>
+    <string name="save_new_password">Save</string>
+
+    <string name="text_email_obligatory">This field is required, please write your email</string>
+    <string name="text_email_invalid">Invalid email</string>
+
+    <string name="welcome">Welcome!</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="text_login">Login</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up"> Sign up</string>
+
+    <string name="text_sign_up">SIGN UP</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="im_already_registered">I\'m already registered</string>
+
+</resources>

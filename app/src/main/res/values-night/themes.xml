@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+   <!-- <style name="Base.Theme.RuutTest" parent="Theme.Material3.DayNight.NoActionBar">
+        &lt;!&ndash; Customize your dark theme here. &ndash;&gt;
+        &lt;!&ndash; <item name="colorPrimary">@color/my_dark_primary</item> &ndash;&gt;
+    </style>-->
+
+    <style name="MyTheme.DarkTheme" parent="Base.MyTheme">
+        <item name="android:statusBarColor">?backgroundColor</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="New Api,NewApi">false</item>
+    </style>
+    <style name="Base.Theme.AlphaTest" parent="MyTheme.DarkTheme">
+
+    </style>
+</resources>

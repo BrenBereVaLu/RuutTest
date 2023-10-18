@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Material Theme Colors-->
+    <color name="color_primary">#a4c9ff</color>
+    <color name="color_primary_variant">#025177</color>
+    <color name="color_secondary">#4755b6</color>
+    <color name="color_secondary_variant">#273ABA</color>
+    <color name="color_accent">#6833ea</color>
+    <color name="color_accent_variant">#4F10EA</color>
+
+    <color name="color_background">#fcfcff</color>
+    <color name="color_surface">#dde3ea</color>
+    <color name="color_error">#93000a</color>
+
+    <color name="color_on_primary">#00344f</color>
+    <color name="color_on_secondary">#41474d</color>
+    <color name="color_on_background">#41474d</color>
+    <color name="color_on_surface">#1a1c1e</color>
+    <color name="color_on_error">#ffffff</color>
+
+    <color name="color_primary_container">#cae6ff</color>
+    <color name="color_on_primary_container">#001e30</color>
+
+    <color name="color_secondary_container">#dfe0ff</color>
+    <color name="color_on_secondary_container">#000d5f</color>
+
+    <color name="color_accent_container">#e8deff</color>
+    <color name="color_on_accent_container">#20005f</color>
+
+    <color name="color_error_container">#ffdad6</color>
+    <color name="color_on_error_container">#410002</color>
+
+    <color name="color_outline">#72787e</color>
+    <color name="color_surface_variant">#dde3ea</color>
+    <color name="color_on_surface_variant">#41474d</color>
+
+</resources>
