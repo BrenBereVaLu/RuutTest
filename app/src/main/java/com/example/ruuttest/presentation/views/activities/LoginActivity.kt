@@ -18,6 +18,9 @@ class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+    /**
+     * If you have a LoginViewModel, you need to change this logic into that ViewModel.
+     */
     private lateinit var appDb: AppDatabase
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -30,6 +33,9 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        /**
+         * If you have the entire logic in the viewModel, perhaps you can instantiate these variables inside the constructor.
+         */
         appDb = AppDatabase.getDatabase(this)
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -39,6 +45,9 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun inputsObserver() {
+        /**
+         * Move these observers into showErrorInput, or better yet, create only one function called initObservers()
+         */
         loginViewModel.gotoMainScreen.observe(this) {
             if (it) {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { fb ->
@@ -55,6 +64,9 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun showErrorInput() {
+        /**
+         * Move these observers into inputObserver, or better yet, create only one function called initObservers()
+         */
         loginViewModel.emailError.observe(this) { email ->
             if (email==0) {
                 binding.tilEmail.error = null
@@ -78,11 +90,14 @@ class LoginActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Move this logic into ViewModel.
+     */
     @OptIn(DelicateCoroutinesApi::class)
     private fun writeData() {
         val user = User(null, email, pass)
         GlobalScope.launch(Dispatchers.IO) {
-            if(appDb.userDao().getAnyUser() == null ){
+            if(appDb.userDao().getAnyUser() == null){
                 //table is empty
                 appDb.userDao().insert(user)
             }

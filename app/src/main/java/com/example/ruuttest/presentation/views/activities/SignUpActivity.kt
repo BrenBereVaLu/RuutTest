@@ -19,6 +19,9 @@ class SignUpActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
 
+    /**
+     * If you have a SignUpViewModel, you need to change this logic into that ViewModel.
+     */
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var appDb: AppDatabase
 

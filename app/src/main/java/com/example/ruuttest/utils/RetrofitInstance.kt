@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitInstance {
 
+
+    /**
+     * Use DI for Retrofit Instance.
+     */
     companion object {
         private val BASE_URL = "https://www.alphavantage.co/"
 

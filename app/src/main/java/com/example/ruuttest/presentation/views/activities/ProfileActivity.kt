@@ -24,6 +24,9 @@ class ProfileActivity : BaseActivity() {
 
     private lateinit var viewModelPass: EditPasswordViewModel
 
+    /**
+     * If you have a EditPasswordViewModel, you need to change this logic into that ViewModel.
+     */
     private lateinit var appDb: AppDatabase
     private lateinit var firebaseAuth: FirebaseAuth
 

@@ -5,6 +5,9 @@ import com.example.ruuttest.domain.responses.incomeStatement.IncomeStatementResp
 import com.example.ruuttest.domain.responses.newsStatement.NewsSentimentResponse
 import retrofit2.http.GET
 
+/**
+ * Remove the API key from here! It's very dangerous, especially if your repository is public.
+ */
 interface AlphaRequest {
 
     //INCOME_STATEMENT

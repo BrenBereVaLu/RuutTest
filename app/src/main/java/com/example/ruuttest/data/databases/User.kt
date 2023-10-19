@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Use objects for constants in your code.
+ */
 @Entity(tableName = "user_table")
 data class User (
     @PrimaryKey(autoGenerate = true) val id:Int?,
