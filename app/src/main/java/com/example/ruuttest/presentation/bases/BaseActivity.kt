@@ -49,6 +49,10 @@ open class BaseActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * I understand that is important to use this function but if you don't use it in this moment,
+     * please deleted.
+     */
     open fun showLoading() {
         dialog = CommonUtils.showLoadingDialog(this,layoutInflater.inflate(
             R.layout.base_progress_dialog,
@@ -56,6 +60,10 @@ open class BaseActivity : AppCompatActivity() {
         ))
     }
 
+    /**
+     * I understand that is important to use this function but if you don't use it in this moment,
+     * please deleted.
+     */
     open fun hideLoading() {
         try {
             if (dialog.isShowing) {

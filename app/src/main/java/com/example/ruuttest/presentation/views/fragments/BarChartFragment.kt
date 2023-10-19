@@ -76,6 +76,9 @@ class BarChartFragment : BaseFragment() {
             list.add(BarEntry(float3,float3))
             list.add(BarEntry(float4,float4))
 
+            /**
+             * Use objects for constants in your code.
+             */
             val barDataSet = BarDataSet(list,"Annual Reports")
             barDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
             barDataSet.valueTextColor= Color.BLACK

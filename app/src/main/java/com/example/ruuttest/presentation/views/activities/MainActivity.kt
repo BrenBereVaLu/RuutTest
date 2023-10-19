@@ -18,6 +18,9 @@ import com.example.ruuttest.presentation.views.fragments.PieChartFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Tell me if you don't know how to implement Dependency Injection (DI).
+ */
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding

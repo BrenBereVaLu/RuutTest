@@ -71,11 +71,17 @@ class PieChartFragment : BaseFragment() {
 
             val list: ArrayList<PieEntry> = ArrayList()
 
+            /**
+             * Use objects for constants in your code.
+             */
             list.add(PieEntry(float, "totalRevenue"))
             list.add(PieEntry(float2,"operateIncome"))
             list.add(PieEntry(float3,"beforeTax"))
             list.add(PieEntry(float4,"costRevenue"))
 
+            /**
+             * Use objects for constants in your code.
+             */
             val pieDataSet = PieDataSet(list,"USD")
             pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
             pieDataSet.valueTextSize=15f
@@ -84,6 +90,9 @@ class PieChartFragment : BaseFragment() {
             val pieData = PieData(pieDataSet)
             pieChart.data = pieData
             pieChart.description.text = data.symbol+" "+ data.annualReports[0].reportedCurrency
+            /**
+             * Use objects for constants in your code.
+             */
             pieChart.centerText = "AnnualReports "+data.annualReports[0].fiscalDateEnding
             pieChart.animateY(2000)
         }

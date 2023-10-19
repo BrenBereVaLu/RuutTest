@@ -5,6 +5,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+/**
+ * CLEAN
+ */
 @Dao
 interface UserDao {
 

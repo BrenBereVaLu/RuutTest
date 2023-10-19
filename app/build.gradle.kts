@@ -65,6 +65,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
+    // I don't like that you needs another SDK for only use Dialgos.
     implementation("com.github.gabriel-TheCode:AestheticDialogs:1.3.8")
     //To onBackPressed https://stackoverflow.com/questions/72634225/onbackpressed-deprecated-what-is-the-alternative
     implementation ("androidx.appcompat:appcompat:1.7.0-alpha03")

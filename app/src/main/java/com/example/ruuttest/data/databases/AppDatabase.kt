@@ -21,6 +21,9 @@ abstract class AppDatabase : RoomDatabase() {
                 return tempInstance
             }
 
+            /**
+             * Use objects for constants in your code.
+             */
             synchronized(this){
                 val instance = Room.databaseBuilder(context.applicationContext,
                     AppDatabase::class.java,

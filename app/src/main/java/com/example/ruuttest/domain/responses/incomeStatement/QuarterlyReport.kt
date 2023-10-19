@@ -4,6 +4,9 @@ package com.example.ruuttest.domain.responses.incomeStatement
 import com.google.gson.annotations.SerializedName
 import com.google.gson.annotations.Expose
 
+/**
+ * I don't understand because you use "Expose" decorator.
+ */
 data class QuarterlyReport(
     @SerializedName("comprehensiveIncomeNetOfTax")
     @Expose
