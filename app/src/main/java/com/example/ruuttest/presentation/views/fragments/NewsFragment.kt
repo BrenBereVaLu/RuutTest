@@ -77,7 +77,7 @@ class NewsFragment : BaseFragment() {
             }
 
             if (filteredList.isEmpty()) {
-                showErrorDialog("No Data found",0,"")
+                showErrorDialog(getString(R.string.no_data_found),0,"")
             } else {
                 adapter.setFilteredList(filteredList)
             }

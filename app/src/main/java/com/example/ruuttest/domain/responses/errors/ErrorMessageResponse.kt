@@ -6,6 +6,6 @@ import com.google.gson.annotations.Expose
 
 data class ErrorMessageResponse(
     @SerializedName("Error Message")
-    @Expose
+    
     var errorMessage: String
 )

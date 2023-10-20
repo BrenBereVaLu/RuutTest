@@ -6,12 +6,12 @@ import com.google.gson.annotations.Expose
 
 data class IncomeStatementResponse(
     @SerializedName("annualReports")
-    @Expose
+    
     var annualReports: List<AnnualReport>,
     @SerializedName("quarterlyReports")
-    @Expose
+    
     var quarterlyReports: List<QuarterlyReport>,
     @SerializedName("symbol")
-    @Expose
+    
     var symbol: String
 )

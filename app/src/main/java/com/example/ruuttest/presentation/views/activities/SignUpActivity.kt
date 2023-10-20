@@ -4,23 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.ruuttest.data.databases.AppDatabase
-import com.example.ruuttest.data.databases.User
+import com.example.ruuttest.data.datas.AuthState
 import com.example.ruuttest.databinding.ActivitySignUpBinding
 import com.example.ruuttest.presentation.bases.BaseActivity
 import com.example.ruuttest.presentation.viewModels.SignUpViewModel
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class SignUpActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var appDb: AppDatabase
 
     private lateinit var signUpViewModel: SignUpViewModel
 
@@ -31,8 +22,6 @@ class SignUpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        appDb = AppDatabase.getDatabase(this)
-        firebaseAuth = FirebaseAuth.getInstance()
 
         configClicks()
         configViewModels()
@@ -43,20 +32,22 @@ class SignUpActivity : BaseActivity() {
             email = binding.etEmail.text.toString()
             pass = binding.etPassword.text.toString()
             val confirmPass = binding.etConfirmPassword.text.toString()
-            signUpViewModel.attemptSignUp(email, pass, confirmPass)
+            signUpViewModel.handleSignUp(email, pass, confirmPass, this)
+            signUpViewModel.authStates.observe(this) {
+                when (it) {
+                    is AuthState.Success -> {
+                        onSuccessSign()
+                    }
 
-            signUpViewModel.gotoLoginScreen.observe(this) {
-                if (it) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener { fb ->
-                            if (fb.isSuccessful) {
-                                writeData()
-                            } else {
-                                showErrorDialog(fb.exception.toString(), 0, "")
-                            }
-                        }
-                } else {
-                    showErrorInput()
+                    is AuthState.AuthInputError -> {
+                        showErrorInput(it)
+                    }
+
+                    is AuthState.AuthError -> {
+                        it.message?.let { msg -> showErrorDialog(msg, 0, "") }
+                    }
+
+                    else -> {}
                 }
             }
         }
@@ -66,59 +57,50 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private fun writeData() {
-        if (email.isNotEmpty() && pass.isNotEmpty()) {
-            val user = User(null, email, pass)
-            GlobalScope.launch(Dispatchers.IO) {
-                appDb.userDao().insert(user)
-            }
-            binding.etEmail.text?.clear()
-            binding.etPassword.text?.clear()
-            binding.etConfirmPassword.text?.clear()
+    private fun onSuccessSign() {
+        binding.etEmail.text?.clear()
+        binding.etPassword.text?.clear()
+        binding.etConfirmPassword.text?.clear()
 
-            Toast.makeText(this@SignUpActivity, "User created successfully!!", Toast.LENGTH_SHORT)
-                .show()
+        Toast.makeText(this@SignUpActivity, "User created successfully!!", Toast.LENGTH_SHORT)
+            .show()
 
-            //showSuccessDialog("User created successfully!!",0,"")
-            goStartActivity(LoginActivity::class.java)
-        }else{
-            showErrorDialog("Please enter data !!", 0, "")
-        }
+        goStartActivity(LoginActivity::class.java)
     }
 
-    private fun showErrorInput() {
-        signUpViewModel.emailError.observe(this) { email ->
-            if (email == 0) {
-                binding.tilEmail.error = null
-            } else {
-                binding.tilEmail.run {
-                    error = getString(email)
-                    requestFocus()
+    private fun showErrorInput(authState: AuthState.AuthInputError) {
+        with(binding) {
+            if (authState.tag == "email") {
+                if (authState.message == 0) {
+                    tilEmail.error = null
+                } else {
+                    tilEmail.run {
+                        error = getString(authState.message)
+                        requestFocus()
+                    }
                 }
             }
-        }
+            if (authState.tag == "pass") {
+                if (authState.message == 0) {
+                    tilPassword.error = null
+                } else {
+                    tilPassword.run {
+                        error = getString(authState.message)
+                        requestFocus()
+                    }
+                }
+            }
+            if (authState.tag == "passConf") {
+                if (authState.message == 0) {
+                    tilConfirmPassword.error = null
+                } else {
+                    tilConfirmPassword.run {
+                        error = getString(authState.message)
+                        requestFocus()
+                    }
+                }
+            }
 
-        signUpViewModel.passwordError.observe(this) { pass ->
-            if (pass == 0) {
-                binding.tilPassword.error = null
-            } else {
-                binding.tilPassword.run {
-                    error = getString(pass)
-                    requestFocus()
-                }
-            }
-        }
-
-        signUpViewModel.confirmPasswordError.observe(this) { confirm ->
-            if (confirm == 0) {
-                binding.tilConfirmPassword.error = null
-            } else {
-                binding.tilConfirmPassword.run {
-                    error = getString(confirm)
-                    requestFocus()
-                }
-            }
         }
     }
 

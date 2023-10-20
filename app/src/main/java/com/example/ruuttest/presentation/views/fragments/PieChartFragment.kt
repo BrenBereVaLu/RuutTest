@@ -20,6 +20,8 @@ import com.github.mikephil.charting.utils.ColorTemplate
 
 class PieChartFragment : BaseFragment() {
 
+    private lateinit var pieData: PieData
+    private lateinit var pieDataSet: PieDataSet
     private lateinit var binding: FragmentPieChartBinding
 
     private val incomeViewModel: IncomeStatementViewModel by viewModels {
@@ -76,12 +78,12 @@ class PieChartFragment : BaseFragment() {
             list.add(PieEntry(float3,"beforeTax"))
             list.add(PieEntry(float4,"costRevenue"))
 
-            val pieDataSet = PieDataSet(list,"USD")
+            pieDataSet = PieDataSet(list,"USD")
             pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
             pieDataSet.valueTextSize=15f
             pieDataSet.valueTextColor= Color.BLACK
 
-            val pieData = PieData(pieDataSet)
+            pieData = PieData(pieDataSet)
             pieChart.data = pieData
             pieChart.description.text = data.symbol+" "+ data.annualReports[0].reportedCurrency
             pieChart.centerText = "AnnualReports "+data.annualReports[0].fiscalDateEnding

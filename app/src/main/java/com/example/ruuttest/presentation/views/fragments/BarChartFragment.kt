@@ -20,6 +20,8 @@ import com.github.mikephil.charting.utils.ColorTemplate
 
 class BarChartFragment : BaseFragment() {
 
+    private lateinit var barData: BarData
+    private lateinit var barDataSet: BarDataSet
     private lateinit var binding: FragmentBarChartBinding
 
     private val balanceViewModel: BalanceSheetViewModel by viewModels {
@@ -76,11 +78,11 @@ class BarChartFragment : BaseFragment() {
             list.add(BarEntry(float3,float3))
             list.add(BarEntry(float4,float4))
 
-            val barDataSet = BarDataSet(list,"Annual Reports")
+            barDataSet = BarDataSet(list,"Annual Reports")
             barDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
             barDataSet.valueTextColor= Color.BLACK
 
-            val barData = BarData(barDataSet)
+            barData = BarData(barDataSet)
 
             barChart.setFitBars(true)
             barChart.data = barData

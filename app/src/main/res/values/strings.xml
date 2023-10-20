@@ -51,4 +51,7 @@
     <string name="hint_confirm_password">Confirm password</string>
     <string name="im_already_registered">I\'m already registered</string>
 
+    <string name="text_ok">Ok</string>
+    <string name="no_data_found">No Data found</string>
+
 </resources>

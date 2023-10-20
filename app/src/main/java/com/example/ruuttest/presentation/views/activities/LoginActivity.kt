@@ -3,23 +3,14 @@ package com.example.ruuttest.presentation.views.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.ruuttest.data.databases.AppDatabase
-import com.example.ruuttest.data.databases.User
+import com.example.ruuttest.data.datas.AuthState
 import com.example.ruuttest.databinding.ActivityLoginBinding
 import com.example.ruuttest.presentation.bases.BaseActivity
 import com.example.ruuttest.presentation.viewModels.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
-    private lateinit var appDb: AppDatabase
-    private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -30,8 +21,6 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        appDb = AppDatabase.getDatabase(this)
-        firebaseAuth = FirebaseAuth.getInstance()
 
         configViewModels()
         configClicks()
@@ -39,57 +28,54 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun inputsObserver() {
-        loginViewModel.gotoMainScreen.observe(this) {
-            if (it) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { fb ->
-                    if (fb.isSuccessful) {
-                        writeData()
-                    } else {
-                        showErrorDialog(fb.exception.toString(), 0, "")
-                    }
+        loginViewModel.authStates.observe(this) {
+            when (it) {
+                is AuthState.Success -> {
+                    onSuccessLogIn()
                 }
-            } else {
-                showErrorInput()
+
+                is AuthState.AuthInputError -> {
+                    showErrorInput(it)
+                }
+
+                is AuthState.AuthError -> {
+                    it.message?.let { msg -> showErrorDialog(msg, 0, "") }
+                }
+
+                else -> {}
             }
         }
     }
 
-    private fun showErrorInput() {
-        loginViewModel.emailError.observe(this) { email ->
-            if (email==0) {
-                binding.tilEmail.error = null
-            } else {
-                binding.tilEmail.run {
-                    error = getString(email)
-                    requestFocus()
-                }
-            }
-        }
-
-        loginViewModel.passwordError.observe(this) { pass ->
-            if (pass==0) {
-                binding.tilPassword.error = null
-            } else {
-                binding.tilPassword.run {
-                    error = getString(pass)
-                    requestFocus()
-                }
-            }
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    private fun writeData() {
-        val user = User(null, email, pass)
-        GlobalScope.launch(Dispatchers.IO) {
-            if(appDb.userDao().getAnyUser() == null ){
-                //table is empty
-                appDb.userDao().insert(user)
-            }
-        }
+    private fun onSuccessLogIn() {
         binding.etEmail.text?.clear()
         binding.etPassword.text?.clear()
         goStartActivity(MainActivity::class.java)
+    }
+
+    private fun showErrorInput(authState: AuthState.AuthInputError) {
+        with(binding){
+            if (authState.tag == "email") {
+                if (authState.message == 0) {
+                    tilEmail.error = null
+                } else {
+                    tilEmail.run {
+                        error = getString(authState.message)
+                        requestFocus()
+                    }
+                }
+            }
+            if (authState.tag == "pass") {
+                if (authState.message == 0) {
+                    tilPassword.error = null
+                } else {
+                    tilPassword.run {
+                        error = getString(authState.message)
+                        requestFocus()
+                    }
+                }
+            }
+        }
     }
 
     private fun goStartActivity(cls: Class<*>?) {
@@ -106,7 +92,7 @@ class LoginActivity : BaseActivity() {
         binding.btnLogin.setOnClickListener {
             email = binding.etEmail.text.toString()
             pass = binding.etPassword.text.toString()
-            loginViewModel.attemptLogin(email, pass)
+            loginViewModel.handleLogin(email, pass, this)
         }
 
         binding.lnlSignUp.setOnClickListener {
